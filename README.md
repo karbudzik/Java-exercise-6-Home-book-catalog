@@ -26,6 +26,7 @@ With this application the user can:
 * See and modify the details of all books, writers and publishers
 
 <img src="Personal-Assessment-Karolina-Budzik/src/main/resources/2.png" width="700">
+
 * See the clear menus of all sections and have their inputs validated to ensure program's intuitive UX (as for the console application).
 
 <img src="Personal-Assessment-Karolina-Budzik/src/main/resources/3.png" width="700">
