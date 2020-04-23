@@ -20,12 +20,12 @@ With this application the user can:
 
 * See the main menu divided into categories for simpler experience
 
-!["ERD diagram"](Personal-Assessment-Karolina-Budzik/src/main/resources/1.png)
+!["Screenshot1"](Personal-Assessment-Karolina-Budzik/src/main/resources/1.png)
 
 * Delete books from the database and delete all publishers and creators that don't have any books assigned to them.
 * See and modify the details of all books, writers and publishers
 
-!["ERD diagram"](Personal-Assessment-Karolina-Budzik/src/main/resources/2.png)
+<img src="Personal-Assessment-Karolina-Budzik/src/main/resources/2.png" width="300">
 * See the clear menus of all sections and have their inputs validated to ensure program's intuitive UX (as for the console application).
 
 !["ERD diagram"](Personal-Assessment-Karolina-Budzik/src/main/resources/3.png)
