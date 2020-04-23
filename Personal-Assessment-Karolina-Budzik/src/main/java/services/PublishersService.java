@@ -23,7 +23,7 @@ public class PublishersService extends Service {
     @Override
     void initializeMenu() {
         menuOptions = new ArrayList<>(Arrays.asList("Show all publishers", "Show all books of specified publisher", "Add new publisher",
-                "Change publisher's id", "Change publisher's name", "Delete publisher without any books", "Go back to main menu"));
+                "Change publisher's name", "Delete publisher without any books", "Go back to main menu"));
     }
 
     @Override
@@ -39,9 +39,6 @@ public class PublishersService extends Service {
                 coordinateAddingNewPublisher();
                 break;
             case 4:
-                coordinateModifyingPublisherId();
-                break;
-            case 5:
                 coordinateModifyingPublisherName();
                 break;
             case 6:
@@ -72,14 +69,6 @@ public class PublishersService extends Service {
         }
         Publisher publisher = new Publisher(ID, name);
         publishersDAO.insertPublisher(publisher);
-    }
-
-    private void coordinateModifyingPublisherId() {
-        view.printPublishers(publishersDAO.getAllPublishers());
-        String name = getExistingPublisherName();
-        String ID = inputManager.getStringInput("Type the publisher's new ID");
-        Publisher publisher = new Publisher(ID, name);
-        publishersDAO.updatePublisherID(publisher);
     }
 
     private void coordinateModifyingPublisherName() {

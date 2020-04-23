@@ -7,8 +7,6 @@ public interface PublishersDAO {
 
     void updatePublisherName(Publisher publisher);
 
-    void updatePublisherID(Publisher publisher);
-
     boolean checkIfIDInDatabase(String ID);
 
     boolean checkIfNameInDatabase(String name);

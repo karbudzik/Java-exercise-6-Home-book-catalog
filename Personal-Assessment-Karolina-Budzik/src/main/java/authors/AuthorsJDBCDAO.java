@@ -27,7 +27,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -44,7 +43,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -61,7 +59,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return false;
     }
@@ -79,7 +76,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return null;
     }
@@ -99,7 +95,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
 
         return authors;
@@ -113,7 +108,6 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 

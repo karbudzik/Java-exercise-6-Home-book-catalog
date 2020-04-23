@@ -28,7 +28,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -44,23 +43,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void updatePublisherID(Publisher publisher) {
-        try (Connection connection = getConnection()) {
-            String psqlStatement = "UPDATE publishers SET ID = ? WHERE name = ?;";
-            PreparedStatement statement = connection.prepareStatement(psqlStatement);
-            statement.setString(1, publisher.getID());
-            statement.setString(2, publisher.getName());
-
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -77,7 +59,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return false;
     }
@@ -95,7 +76,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return false;
     }
@@ -113,7 +93,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return null;
     }
@@ -146,7 +125,6 @@ public class PublishersJDBCDAO implements PublishersDAO {
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 

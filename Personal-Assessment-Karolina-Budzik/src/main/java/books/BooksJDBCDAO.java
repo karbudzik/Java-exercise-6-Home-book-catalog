@@ -32,7 +32,6 @@ public class BooksJDBCDAO implements BooksDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -52,7 +51,6 @@ public class BooksJDBCDAO implements BooksDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -68,7 +66,6 @@ public class BooksJDBCDAO implements BooksDAO {
 
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
@@ -85,7 +82,6 @@ public class BooksJDBCDAO implements BooksDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return false;
     }
@@ -105,7 +101,6 @@ public class BooksJDBCDAO implements BooksDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return library;
     }
@@ -126,7 +121,6 @@ public class BooksJDBCDAO implements BooksDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return library;
     }
@@ -147,7 +141,6 @@ public class BooksJDBCDAO implements BooksDAO {
             }
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
         return library;
     }
@@ -173,7 +166,6 @@ public class BooksJDBCDAO implements BooksDAO {
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
         }
     }
 
