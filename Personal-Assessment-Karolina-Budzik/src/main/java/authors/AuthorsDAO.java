@@ -1,6 +1,7 @@
 package authors;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorsDAO {
     void insertAuthor(Author author);
@@ -9,7 +10,7 @@ public interface AuthorsDAO {
 
     boolean checkIfAuthorIdInDatabase(int ISBN);
 
-    Author getAuthorById(int ID);
+    Optional<Author> getAuthorById(int ID);
 
     List<Author> getAllAuthors();
 

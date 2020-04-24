@@ -31,7 +31,7 @@ public class BooksJDBCDAO implements BooksDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database while inserting into books table.");
         }
     }
 
@@ -50,7 +50,7 @@ public class BooksJDBCDAO implements BooksDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database while updating book.");
         }
     }
 
@@ -60,12 +60,12 @@ public class BooksJDBCDAO implements BooksDAO {
             String psqlStatement = "UPDATE books SET ISBN = ? WHERE ISBN = ?;";
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
             statement.setLong(1, newISBN);
-            statement.setLong(7, oldISBN);
+            statement.setLong(2, oldISBN);
 
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database while updating book's ISBN.");
         }
     }
 
@@ -77,13 +77,11 @@ public class BooksJDBCDAO implements BooksDAO {
             statement.setLong(1, ISBN);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
+
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return false;
     }
 
     @Override
@@ -100,7 +98,7 @@ public class BooksJDBCDAO implements BooksDAO {
                 library.add(book);
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
         return library;
     }
@@ -120,7 +118,7 @@ public class BooksJDBCDAO implements BooksDAO {
                 library.add(book);
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
         return library;
     }
@@ -140,7 +138,7 @@ public class BooksJDBCDAO implements BooksDAO {
                 library.add(book);
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
         return library;
     }
@@ -153,8 +151,7 @@ public class BooksJDBCDAO implements BooksDAO {
             statement.setLong(1, ISBN);
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 
@@ -165,7 +162,7 @@ public class BooksJDBCDAO implements BooksDAO {
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 

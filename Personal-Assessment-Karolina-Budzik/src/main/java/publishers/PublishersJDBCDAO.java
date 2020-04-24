@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PublishersJDBCDAO implements PublishersDAO {
     private Connection getConnection() {
@@ -27,7 +28,7 @@ public class PublishersJDBCDAO implements PublishersDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 
@@ -42,7 +43,7 @@ public class PublishersJDBCDAO implements PublishersDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 
@@ -54,13 +55,11 @@ public class PublishersJDBCDAO implements PublishersDAO {
             statement.setString(1, ID);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
+
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return false;
     }
 
     @Override
@@ -71,17 +70,15 @@ public class PublishersJDBCDAO implements PublishersDAO {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
+
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return false;
     }
 
     @Override
-    public Publisher getPublisherByID(String ID) {
+    public Optional<Publisher> getPublisherByID(String ID) {
         try (Connection connection = getConnection()) {
             String psqlStatement = "SELECT * FROM publishers WHERE id = ?;";
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
@@ -89,12 +86,13 @@ public class PublishersJDBCDAO implements PublishersDAO {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return extractPublisherFromResultSet(resultSet);
+                return Optional.of(extractPublisherFromResultSet(resultSet));
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return null;
     }
 
     @Override
@@ -111,8 +109,7 @@ public class PublishersJDBCDAO implements PublishersDAO {
                 publishers.add(publisher);
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
-            e.printStackTrace();
+            throw new RuntimeException("Error connecting to database.");
         }
         return publishers;
     }
@@ -124,7 +121,7 @@ public class PublishersJDBCDAO implements PublishersDAO {
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 

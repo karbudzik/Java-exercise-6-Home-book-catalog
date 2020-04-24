@@ -1,6 +1,7 @@
 package publishers;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PublishersDAO {
     void insertPublisher(Publisher publisher);
@@ -11,7 +12,7 @@ public interface PublishersDAO {
 
     boolean checkIfNameInDatabase(String name);
 
-    Publisher getPublisherByID(String ID);
+    Optional<Publisher> getPublisherByID(String ID);
 
     List<Publisher> getAllPublishers();
 

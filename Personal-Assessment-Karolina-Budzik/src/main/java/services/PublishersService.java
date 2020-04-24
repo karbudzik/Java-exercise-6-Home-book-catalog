@@ -1,5 +1,6 @@
 package services;
 
+import authors.Author;
 import books.BooksDAO;
 import interactions.InputManager;
 import interactions.View;
@@ -9,6 +10,7 @@ import publishers.PublishersDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class PublishersService extends Service {
     private final BooksDAO booksDAO;
@@ -49,8 +51,9 @@ public class PublishersService extends Service {
     private void coordinateShowingPublisherDetails() {
         view.printPublishers(publishersDAO.getAllPublishers());
         String publisherID = getExistingPublisherId();
-        Publisher publisher = publishersDAO.getPublisherByID(publisherID);
-        if (publisher!=null){
+        Optional<Publisher> maybe = publishersDAO.getPublisherByID(publisherID);
+        if (maybe.isPresent()) {
+            Publisher publisher = maybe.get();
             view.print(String.format("All books published by %s:", publisher.getName()));
             view.printBooks(booksDAO.getBooksByPublisherID(publisherID));
         } else {

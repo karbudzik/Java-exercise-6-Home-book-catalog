@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AuthorsJDBCDAO implements AuthorsDAO {
     private Connection getConnection() {
@@ -26,7 +27,7 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database while inserting new author.");
         }
     }
 
@@ -42,7 +43,7 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database while updating the author.");
         }
     }
 
@@ -54,17 +55,15 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             statement.setInt(1, ID);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
+
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return false;
     }
 
     @Override
-    public Author getAuthorById(int ID) {
+    public Optional<Author> getAuthorById(int ID) {
         try (Connection connection = getConnection()) {
             String psqlStatement = "SELECT * FROM authors WHERE id = ?;";
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
@@ -72,12 +71,13 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return extractAuthorFromResultSet(resultSet);
+                return Optional.of(extractAuthorFromResultSet(resultSet));
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
-        return null;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
                 authors.add(author);
             }
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
 
         return authors;
@@ -107,7 +107,7 @@ public class AuthorsJDBCDAO implements AuthorsDAO {
             PreparedStatement statement = connection.prepareStatement(psqlStatement);
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Sorry, couldn't connect to database.");
+            throw new RuntimeException("Error connecting to database.");
         }
     }
 

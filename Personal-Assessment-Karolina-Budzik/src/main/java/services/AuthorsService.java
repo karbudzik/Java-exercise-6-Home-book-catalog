@@ -9,6 +9,7 @@ import interactions.View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class AuthorsService extends Service {
     private final BooksDAO booksDAO;
@@ -49,8 +50,9 @@ public class AuthorsService extends Service {
     private void coordinateShowingAuthorsDetails() {
         view.printAuthors(authorsDAO.getAllAuthors());
         int authorID = getExistingAuthorID();
-        Author author = authorsDAO.getAuthorById(authorID);
-        if (author!=null){
+        Optional<Author> maybe = authorsDAO.getAuthorById(authorID);
+        if (maybe.isPresent()){
+            Author author = maybe.get();
             view.print(String.format("All books by %s %s:", author.getFirstName(), author.getLastName()));
             view.printBooks(booksDAO.getBooksByAuthorID(authorID));
         } else {
